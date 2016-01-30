@@ -17,8 +17,8 @@ module.exports = function( options) {
 
 	var noop = function () {};
 	var plugin = "mongoDb";
-	var MongoProvider = require('../lib/MongoProvider');
-	var MongoStore = require('../lib/MongoStore');
+	var MongoProvider = require('./lib/MongoProvider');
+	var MongoStore = require('./lib/MongoStore');
 	var dbClient,dbProvider;
 	// init seneca plugins
 	seneca.add('init:mongoDb',init);
@@ -31,7 +31,7 @@ module.exports = function( options) {
 	function init (args,cb) {
 		var seneca = this;
 		dbProvider= new MongoProvider(seneca.log);
-		dbProvider.db(config.mongo_connection,config.mongo_options,function(err,db){
+		dbProvider.data(config.mongo_connection,config.mongo_options,function(err,db){
 			if (err){cb(err)}
 				dbClient = new MongoStore(db,seneca.log);
 				return cb();
@@ -76,9 +76,8 @@ module.exports = function( options) {
 				if(err){return cb(err)}
 					console.log("stats insert")
 					cb();
-				})
-			});
-		})
+			})
+		});
 	}
 
 /* function
