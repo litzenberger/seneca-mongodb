@@ -18,11 +18,34 @@ var config={
 		}
 	}
 
+//test db connction insert and update
 var dbProvider = new MongoProvider(console.log);
 dbProvider.data(config.mongo_connection,config.mongo_options,function(err,db){
 	if (err){cb(err)}
 		var dbStore = new MongoStore(db,console.log);
 			//close
-			dbProvider.close();
+			dbStore.use("testingCollection",function(){
+
+				var doc={_id:"uniquekeytest",
+					a:1,
+					b:2
+				}
+				// test insert
+				dbStore.insert(doc,function(err,results){
+					if(err){cb(err);}
+					console.log("doc insert")
+					var doc=[{_id:"uniquekeytest",
+					c:3}]
+					// test multi
+					dbStore.updateMulti(doc,"c",function(err,results){
+						if(err){cb(err);}
+						console.log("doc update")
+						dbProvider.close();
+
+					})
+
+				})
+
+			})
 
 }); // end mongo provider
