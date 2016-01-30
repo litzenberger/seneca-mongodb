@@ -1,4 +1,5 @@
 # seneca-mongodb
-mongodb store
+mongodb plugin for seneca
 
+supports insert and update.
 
