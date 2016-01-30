@@ -24,12 +24,12 @@ module.exports = function( options) {
 	seneca.add('init:mongoDb',init);
 	seneca.add({role : plugin,cmd : 'close'}, close);// store in a collection 
 	seneca.add({role : plugin,cmd : 'aggregateSave'}, aggregate);// 
-
+	seneca.add({role : plugin,cmd : 'insert'}, insert);// 
 	// store in a collection 
 
 	// initialize
 	function init (args,cb) {
-		var seneca = this;
+		var ertieneca = this;
 		dbProvider= new MongoProvider(seneca.log);
 		dbProvider.data(config.mongo_connection,config.mongo_options,function(err,db){
 			if (err){cb(err)}
