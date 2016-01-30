@@ -7,7 +7,6 @@
 var _ = require('underscore');
 var util = require('util');
 var path = require('path');
-var uuid = require('node-uuid');
 var fs = require('fs');
 
 module.exports = function( options) {
